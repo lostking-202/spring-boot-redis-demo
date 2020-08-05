@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class KeyDemoService {
     @Autowired
-    RedisTemplate<String,Object> redisTemplate;
+    RedisTemplate<String,String> redisTemplate;
 
     public boolean hasKey(String key){
         return redisTemplate.hasKey(key);

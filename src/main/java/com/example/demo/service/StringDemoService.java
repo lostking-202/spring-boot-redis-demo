@@ -4,12 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.TimeUnit;
+
 @Service
 public class StringDemoService {
     @Autowired
     RedisTemplate<String,String> redisTemplate;
     public void set(String key,String value){
         redisTemplate.opsForValue().set(key,value);
+    }
+    public void set(String key, String value, long timeout, TimeUnit timeUnit){
+        redisTemplate.opsForValue().set(key,value,timeout,timeUnit);
     }
     //存入新值并返回旧值
     public String getAndSet(String key,String value){
