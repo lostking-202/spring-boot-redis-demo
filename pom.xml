@@ -13,10 +13,18 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-boot-redis-demo</name>
 	<description>Demo project for Spring Boot</description>
+	<packaging>pom</packaging>
 
 	<properties>
 		<java.version>8</java.version>
 	</properties>
+
+	<modules>
+		<module>redis_sender</module>
+		<module>redis_listener</module>
+		<module>redis_distribute_lock_demo</module>
+		<module>redis_quick_start</module>
+	</modules>
 
 	<dependencies>
 		<dependency>
@@ -27,7 +35,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
