@@ -20,7 +20,7 @@ public class RedisDistributedLock {
         return false;
     }
     public void doSomething(){
-        //设置守护线程
+        //设置守护线程，防止事情没做完锁就过期了
         Thread daemonThread= new Thread(() -> {
             //加时间,设置每25s重置过期时间
             try{
@@ -44,8 +44,10 @@ public class RedisDistributedLock {
     }
     public boolean tryUnlock(){
         if(INSTANCE_ID.equals(redisTemplate.opsForValue().get(LOCK_KEY))){
-            redisTemplate.convertAndSend("unlock","unlock success");
-            return redisTemplate.delete("distributeLock");
+            if(redisTemplate.delete(LOCK_KEY)){
+                redisTemplate.convertAndSend("unlock","unlock success");
+            }
+            return true;
         }
         return false;
     }
